@@ -11,7 +11,7 @@ type reporter struct {
 
 // NewReporter returns a services.Reporter that uses the zap logging library to
 // output the process actions.
-func NewReporter(logger *zap.Logger) services.Reporter {
+func NewReporter(logger *zap.Logger) services.RetrierReporter {
 	return &reporter{
 		logger: logger,
 	}
@@ -59,4 +59,14 @@ func (reporter *reporter) AfterLoad(configurable services.Configurable, err erro
 		return
 	}
 	reporter.logger.Info("Configuration loaded", zap.String("service", serviceName))
+}
+
+func (reporter *reporter) BeforeRetry(service services.Service, try int) {
+	serviceName := service.Name()
+	reporter.logger.Info("Retrying service", zap.String("service", serviceName), zap.Int("try", try))
+}
+
+func (reporter *reporter) AfterGiveUp(service services.Service, try int, err error) {
+	serviceName := service.Name()
+	reporter.logger.Info("Giving up", zap.String("service", serviceName), zap.Int("try", try), zap.Error(err))
 }
