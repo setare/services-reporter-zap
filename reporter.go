@@ -1,6 +1,8 @@
 package zapreporter
 
 import (
+	"os"
+
 	"github.com/setare/services"
 	"go.uber.org/zap"
 )
@@ -11,17 +13,27 @@ type reporter struct {
 
 // NewReporter returns a services.Reporter that uses the zap logging library to
 // output the process actions.
-func NewReporter(logger *zap.Logger) services.RetrierReporter {
+func NewReporter(logger *zap.Logger, options ...zap.Option) services.Reporter {
+	l := logger
+	if len(options) > 0 {
+		l = logger.WithOptions(zap.AddCallerSkip(2))
+	}
 	return &reporter{
-		logger: logger,
+		logger: l,
 	}
 }
 
 func (reporter *reporter) BeforeStart(service services.Service) {
+	if service == nil {
+		return
+	}
 	reporter.logger.Info("Starting", zap.String("service", service.Name()))
 }
 
 func (reporter *reporter) AfterStart(service services.Service, err error) {
+	if service == nil {
+		return
+	}
 	if err != nil {
 		reporter.logger.Error("Start failed", zap.String("service", service.Name()), zap.Error(err))
 		return
@@ -30,10 +42,17 @@ func (reporter *reporter) AfterStart(service services.Service, err error) {
 }
 
 func (reporter *reporter) BeforeStop(service services.Service) {
+	if service == nil {
+		reporter.logger.Info("Stopping services")
+		return
+	}
 	reporter.logger.Info("Stopping", zap.String("service", service.Name()))
 }
 
 func (reporter *reporter) AfterStop(service services.Service, err error) {
+	if service == nil {
+		return
+	}
 	if err != nil {
 		reporter.logger.Error("Stop failed", zap.String("service", service.Name()), zap.Error(err))
 		return
@@ -59,6 +78,10 @@ func (reporter *reporter) AfterLoad(configurable services.Configurable, err erro
 		return
 	}
 	reporter.logger.Info("Configuration loaded", zap.String("service", serviceName))
+}
+
+func (reporter *reporter) SignalReceived(sig os.Signal) {
+	reporter.logger.Info("signal received", zap.String("signal", sig.String()))
 }
 
 func (reporter *reporter) BeforeRetry(service services.Service, try int) {
