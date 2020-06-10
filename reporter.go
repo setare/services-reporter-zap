@@ -13,7 +13,7 @@ type reporter struct {
 
 // NewReporter returns a services.Reporter that uses the zap logging library to
 // output the process actions.
-func NewReporter(logger *zap.Logger, options ...zap.Option) services.Reporter {
+func NewReporter(logger *zap.Logger, options ...zap.Option) services.RetrierReporter {
 	l := logger
 	if len(options) > 0 {
 		l = logger.WithOptions(zap.AddCallerSkip(2))
