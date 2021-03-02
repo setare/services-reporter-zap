@@ -41,8 +41,12 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
+github.com/setare/go-os-signals v0.1.0 h1:aKcRQxnb4vEBwNsNHfXITQ/eDaGvqdE2k45fcnFwRM4=
+github.com/setare/go-os-signals v0.1.0/go.mod h1:mFzeCWGCozoalPbPOkzgE3pmfu9ne1tgSv6g2qT6EIM=
 github.com/setare/services v0.0.0-20200531033142-f5cf1e942cbb h1:VimRL9AJclEXWZkCaM4evwQfSLPqByUPgSksLUFK1oY=
 github.com/setare/services v0.0.0-20200531033142-f5cf1e942cbb/go.mod h1:mA4v9XgadWY4wRQKJ7ixH+wbrpgSAx7sgKGaZ1UsPNY=
+github.com/setare/services v0.0.0-20210302031230-855ed5cb20f9 h1:osVhb57/xcTqQ2lk6Y+bG5urwwafU+usPczZ5jiEeSw=
+github.com/setare/services v0.0.0-20210302031230-855ed5cb20f9/go.mod h1:g6wqJIPruiDucZ+9E1QaKrD8bJ8ks4WvrVIUdZpHHxU=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.4.0 h1:2E4SXV/wtOkTonXsotYi4li6zVWxYlZuYNCXe9XRJyk=
